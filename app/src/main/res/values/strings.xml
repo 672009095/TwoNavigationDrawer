@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TwoNavigationDrawer</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="right_drawer"></string>
+</resources>
