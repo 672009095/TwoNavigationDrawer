@@ -1,10 +1,7 @@
 package com.skyshi.twonavigationdrawer;
 
-import android.content.Context;
 import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
+        //setContentView(R.layout.two_drawer_activity_layout);
         setContentView(R.layout.two_drawer_activity_layout);
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         mDrawerLeft = (RelativeLayout)findViewById(R.id.drawerLeft);
@@ -53,15 +51,25 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_right_drawer){
+            if(mDrawerLayout.isDrawerOpen(mDrawerLeft)){
+                mDrawerLayout.closeDrawer(mDrawerLeft);
+            }
             if(mDrawerLayout.isDrawerOpen(mDrawerRight)){
                 mDrawerLayout.closeDrawer(mDrawerRight);
-            }else{
+            }else {
+            //if(){
                 mDrawerLayout.openDrawer(mDrawerRight);
             }
         }
         if (mDrawerToggle.onOptionsItemSelected(item)) {
-            if(mDrawerLayout.isDrawerOpen(mDrawerRight))
+            if(mDrawerLayout.isDrawerOpen(mDrawerRight)){
                 mDrawerLayout.closeDrawer(mDrawerRight);
+            }
+            if(mDrawerLayout.isDrawerOpen(mDrawerLeft)) {
+                mDrawerLayout.closeDrawer(mDrawerLeft);
+            }else{
+                mDrawerLayout.openDrawer(mDrawerLeft);
+            }
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -132,12 +140,5 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle.setDrawerIndicatorEnabled(true);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
-    public static final int getColor(Context context, int id) {
-        final int version = Build.VERSION.SDK_INT;
-        if (version >= Build.VERSION_CODES.M) {
-            return ContextCompat.getColor(context,id);
-        } else {
-            return context.getResources().getColor(id);
-        }
-    }
+
 }
